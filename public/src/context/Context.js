@@ -65,7 +65,7 @@ const AppProvider = ({ children }) => {
     const { email, password, source } = currentUser
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BACK_URL}/v1/login`,
+        '/v1/login',
         {
           email,
           password,
@@ -86,7 +86,7 @@ const AppProvider = ({ children }) => {
     const { name, email, password, source } = currentUser
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BACK_URL}/v1/login`,
+        '/v1/login',
         {
           name,
           email,

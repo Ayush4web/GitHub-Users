@@ -1,5 +1,6 @@
 require('dotenv').config()
 require('express-async-errors')
+const path = require('path')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -23,11 +24,22 @@ app.use(cors())
 app.use(cookieParser())
 app.use(cors({ credentials: true, origin: true }))
 
+// CSP fix
+const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header')
+app.use(
+  expressCspHeader({
+    policies: {
+      'default-src': [expressCspHeader.NONE],
+      'img-src': [expressCspHeader.SELF],
+    },
+  })
+) 
+
 const port = process.env.PORT || 5000
 
-app.get('/', (req, res) => {
-  res.json({ msg: 'welcome to the auth api' })
-})
+// app.get('/', (req, res) => {
+//   res.json({ msg: 'welcome to the auth api' })
+// })
 
 app.use('/v1', authRouter)
 app.use('/v1', auth, dashboardRouter)
@@ -73,16 +85,22 @@ app.get(
           .json({ success: 'false', msg:"Authentication Failed" })
     }
     const { name, email, profileImg } = req.user
-    const token = jwt.sign({ name, email, profileImg }, process.env.JWT_SECRET)
+     const token = jwt.sign({ name, email, profileImg }, process.env.JWT_SECRET)
      
     
-    res.cookie('token', token).send()
-    // res.redirect(`${process.env.FRONT_URL}/signup`)
-    // res.status(200).json({success:"true"})
+    res.cookie('token', token)
+    res.redirect('/dashboard')
     
   }
+
 )
  
+
+app.use(express.static(path.join(__dirname, './public/build')))
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/build/index.html'))
+})
 
 app.use(customErrorHandler)
 app.use(notfound)

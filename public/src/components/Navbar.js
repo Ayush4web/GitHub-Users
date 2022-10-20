@@ -22,7 +22,7 @@ export const Navbar = () => {
     }
 
     const { data: res } = await axios.get(
-      `${process.env.REACT_APP_BACK_URL}/v1/dashboard`,
+      '/v1/dashboard',
       config
     )
 
@@ -37,9 +37,9 @@ export const Navbar = () => {
     
     try {
       const { data: res } = await axios.get(
-        `${process.env.REACT_APP_BACK_URL}/v1/logout`
+        '/v1/logout'
       )
-      
+
       navigate('/signup')
       removeCookie('token',{path:'/'})
        

@@ -30,9 +30,8 @@ export const Signup = () => {
     e.preventDefault()
   
     window.open(`${process.env.REACT_APP_BACK_URL}/auth/google`, '_self')
-     const data = await axios.get(`${process.env.REACT_APP_BACK_URL}/auth/google`)
-    console.log(data)
-    
+   
+     
   }
   const handleSubmit = (e) => {
     e.preventDefault()
