@@ -76,7 +76,7 @@ app.get(
     const token = jwt.sign({ name, email, profileImg }, process.env.JWT_SECRET)
      
     
-    res.cookie('token', token).redirect(`${process.env.FRONT_URL}/dashboard`)
+    res.cookie('token', token).send()
     // res.redirect(`${process.env.FRONT_URL}/signup`)
     // res.status(200).json({success:"true"})
     

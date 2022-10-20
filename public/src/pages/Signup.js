@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { Link } from 'react-router-dom'
@@ -25,11 +26,11 @@ export const Signup = () => {
     removeAlert,
   } = useGlobalContext()
 
-  const socialLogin = (e) => {
+  const socialLogin = async(e) => {
     e.preventDefault()
   
     window.open(`${process.env.REACT_APP_BACK_URL}/auth/google`, '_self')
-     const data = fetch(`${process.env.REACT_APP_BACK_URL}/auth/google`)
+     const data = await axios.get(`${process.env.REACT_APP_BACK_URL}/auth/google`)
     console.log(data)
     
   }
