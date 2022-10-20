@@ -75,7 +75,7 @@ const AppProvider = ({ children }) => {
       const jwt = res.data.token
 
       setToken(jwt)
-      window.open('/dashboard', '_same')
+      window.open('/dashboard', '_self')
     } catch (error) {
       setAlert({ type: 'danger', text: 'Invalid Credentials' })
       removeAlert()
@@ -96,7 +96,7 @@ const AppProvider = ({ children }) => {
 
       const jwt = res.data.token
        setToken(jwt)
-      window.open('/dashboard', '_same')
+      window.open('/dashboard', '_self')
     } catch (error) {
       setAlert({ type: 'danger', text: 'Invalid Credentials' })
       removeAlert()

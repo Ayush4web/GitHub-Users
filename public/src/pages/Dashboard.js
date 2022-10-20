@@ -16,14 +16,14 @@ export const Dashboard = () => {
    const [cookies, setCookie] = useCookies()
   
   const token = cookies.token
-  console.log(`all cookie in daashboard `, cookies)
+  console.log(cookies)
      
   useEffect(() => {
     if (!token) {
-         navigate('/signup')
+      navigate('/signup')
     }
    
-  },[token])
+  },[])
 
   if (loading) {
     return (

@@ -77,7 +77,7 @@ app.get(
      
     
     res.cookie('token', token)
-    res.redirect(`${process.env.FRONT_URL}/dashboard`)
+    res.redirect(`${process.env.FRONT_URL}/signup`)
     
   }
 )
