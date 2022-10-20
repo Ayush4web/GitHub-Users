@@ -14,6 +14,7 @@ export const Dashboard = () => {
   const navigate = useNavigate()
   
   const token = document.cookie.slice(6)
+  console.log(document.cookie)
      
   useEffect(() => {
     if (!token) {

@@ -9,7 +9,8 @@ export const Navbar = () => {
     const navigate = useNavigate()
   const [user, setUser] = useState({ name: '', email: '', profileImg: '' })
   const fetch = async () => {
-     setLoading(true)
+    setLoading(true)
+    console.log(`navbar cookie- ${document.cookie}`)
     const token = document.cookie.slice(6)
     const config = {
       headers: {
