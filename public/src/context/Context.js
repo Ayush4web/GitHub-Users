@@ -6,13 +6,13 @@ import mockFollowers from './mockData/mockFollowers'
 import mockRepos from './mockData/mockRepos'
 import mockUser from './mockData/mockUser'
 import { useNavigate } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 
 const AppContext = React.createContext()
 
 const rootUrl = 'https://api.github.com'
 const AppProvider = ({ children }) => {
-  
-  
+  const [cookies, setCookie] = useCookies()
   const [githubUser, setGithubUser] = useState(mockUser)
   const [repos, setRepos] = useState(mockRepos)
   const [followers, setFollowers] = useState(mockFollowers)
@@ -20,7 +20,7 @@ const AppProvider = ({ children }) => {
   const [requests, setRequests] = useState(0)
   const [error, setError] = useState({ show: false, msg: '' })
   const [alert, setAlert] = useState({ type: '', text: '' })
-  
+  const [token, setToken] = useState(null)
 
   const fetchRequests = async () => {
     const data = await axios(`${rootUrl}/rate_limit`)
@@ -57,38 +57,33 @@ const AppProvider = ({ children }) => {
   }
   const removeAlert = () => {
     setTimeout(() => {
-         setAlert({})
-       },2000)
+      setAlert({})
+    }, 2000)
   }
-  
+
   const loginUser = async (currentUser) => {
-   
-     
     const { email, password, source } = currentUser
     try {
-      
-        const res = await axios.post(
-          `${process.env.REACT_APP_BACK_URL}/v1/login`,
-          {
-            email,
-            password,
-          }
-        )
-      
-      const token = res.data.token
-      document.cookie = `token=${token}`
-      window.open('/dashboard',"_same")
-    
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACK_URL}/v1/login`,
+        {
+          email,
+          password,
+        }
+      )
+
+      const jwt = res.data.token
+
+      setToken(jwt)
+      window.open('/dashboard', '_same')
     } catch (error) {
       setAlert({ type: 'danger', text: 'Invalid Credentials' })
       removeAlert()
     }
   }
-  
 
   const registerUser = async (currentUser) => {
-         
-    const { name,email, password, source } = currentUser
+    const { name, email, password, source } = currentUser
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_BACK_URL}/v1/login`,
@@ -99,14 +94,20 @@ const AppProvider = ({ children }) => {
         }
       )
 
-      const token = res.data.token
-      document.cookie = `token=${token}`
+      const jwt = res.data.token
+       setToken(jwt)
       window.open('/dashboard', '_same')
     } catch (error) {
       setAlert({ type: 'danger', text: 'Invalid Credentials' })
       removeAlert()
     }
   }
+
+  useEffect(() => {
+    if (token) {
+      setCookie('token', token)
+    }
+  }, [token])
 
   return (
     <AppContext.Provider
@@ -124,6 +125,8 @@ const AppProvider = ({ children }) => {
         loginUser,
         registerUser,
         removeAlert,
+        token,
+        setToken
       }}
     >
       {' '}

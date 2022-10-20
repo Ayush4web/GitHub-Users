@@ -25,7 +25,7 @@ export const Signup = () => {
 
   const socialLogin = (e) => {
     e.preventDefault()
-    console.log(process.env.REACT_APP_BACK_URL)
+  
     window.open(`${process.env.REACT_APP_BACK_URL}/auth/google`, '_self')
   }
   const handleSubmit = (e) => {

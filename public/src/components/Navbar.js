@@ -1,17 +1,20 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
 import { useGlobalContext } from '../context/Context'
 import noImg from '../noImg.png'
 
 export const Navbar = () => {
-  const { loading, setLoading } = useGlobalContext()
-    const navigate = useNavigate()
+  const { loading, setLoading,setToken } = useGlobalContext()
+  const navigate = useNavigate()
+  const [cookies, setCookie, removeCookie] = useCookies()
+  
   const [user, setUser] = useState({ name: '', email: '', profileImg: '' })
   const fetch = async () => {
     setLoading(true)
-    console.log(`navbar cookie- ${document.cookie}`)
-    const token = document.cookie.slice(6)
+   
+    const token = cookies.token
     const config = {
       headers: {
         authorization: `Bearer ${token}`,
@@ -29,14 +32,15 @@ export const Navbar = () => {
 
   }
 
-  const handleLogout = async () => {
   
+  const handleLogout = async () => {
+    
     try {
       const { data: res } = await axios.get(
         `${process.env.REACT_APP_BACK_URL}/v1/logout`
       )
-      document.cookie = 'token' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
       navigate('/signup')
+      removeCookie('token',{path:'/'})
        
     } catch (error) {
       
@@ -45,7 +49,7 @@ export const Navbar = () => {
   }
   useEffect(() => {
     fetch()
-  }, [])
+  }, [cookies])
   return (
     <section className='navbar d-flex align-item-center justify-content-center'>
       {user && (

@@ -7,19 +7,22 @@ import { User } from '../components/User'
 import { useGlobalContext } from '../context/Context'
 import loader from '../preloader.gif'
 import { useNavigate } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 
 
 export const Dashboard = () => {
-  const { loading } = useGlobalContext()
+  const { loading} = useGlobalContext()
   const navigate = useNavigate()
+   const [cookies, setCookie] = useCookies()
   
-  const token = document.cookie.slice(6)
-  console.log(document.cookie)
+  const token = cookies.token
+  console.log(`all cookie in daashboard `, cookies)
      
   useEffect(() => {
     if (!token) {
          navigate('/signup')
-      }
+    }
+   
   },[token])
 
   if (loading) {
