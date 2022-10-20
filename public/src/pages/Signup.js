@@ -29,9 +29,9 @@ export const Signup = () => {
     e.preventDefault()
   
     window.open(`${process.env.REACT_APP_BACK_URL}/auth/google`, '_self')
-     
-    console.log(cookies.token)
-    // window.open('/dashboard', '_self')
+     const data = fetch(`${process.env.REACT_APP_BACK_URL}/auth/google`)
+    console.log(data)
+    
   }
   const handleSubmit = (e) => {
     e.preventDefault()
