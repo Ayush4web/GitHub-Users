@@ -1,0 +1,289 @@
+body {
+  background-color: #f1f5f8;
+}
+h4 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.section {
+  min-height: 100vh;
+}
+.height-60 {
+  height: 60vh;
+}
+.section-center {
+  width: 85vw;
+  margin: 3rem auto;
+}
+
+.card {
+  border: none;
+  width: 250px;
+  border-radius: 5px;
+  padding: 0.5rem 1.5rem;
+  background: white;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 3rem;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.card span {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+
+  place-items: center;
+  border-radius: 50%;
+}
+.card svg {
+  font-size: 1.5rem;
+}
+.label {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+
+.pink {
+  color: rgb(218, 74, 145);
+  background-color: rgb(255, 224, 240);
+}
+.green {
+  color: #2caeba;
+  background-color: #e0fcff;
+}
+.purple {
+  background: rgb(230, 230, 255);
+  color: rgb(93, 85, 250);
+}
+.yellow {
+  background: rgb(255, 251, 234);
+  color: rgb(240, 180, 41);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin: 2rem 0;
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .cardy {
+    padding: 1rem 0.2rem !important;
+    width: 85vw;
+  }
+}
+@media (max-width:576px) {
+  .navbar{
+    height: 7rem !important;
+  }
+   .card{
+    width: 100%;
+  }
+  
+}
+.cardy {
+  background-color: white;
+  height: 20rem;
+  border-radius: 5px;
+  position: relative;
+  padding: 2rem 2.5rem;
+}
+.cardy::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-100%);
+  background-color: white;
+  width: 6rem;
+  height: 2rem;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #617d98;
+}
+.u::before {
+  content: "User";
+}
+.f::before {
+  content: "Followers";
+  width: 8rem;
+}
+.followers {
+  overflow-y: scroll;
+  height: 18rem;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.header img {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+.cbtn {
+  transition: all 0.3s ease-in-out;
+  width: 6rem;
+  font-size: 1.2rem;
+  border-radius: 20px;
+}
+.cbtn:hover {
+  color: white;
+}
+.links {
+  margin-top: 1rem;
+  color: #617d98;
+}
+.links p {
+  margin-bottom: 0.25rem;
+}
+.links svg {
+  margin-right: 0.5rem;
+  font-size: 1.4rem;
+  color: #617d98;
+}
+.links a {
+  text-decoration: none;
+  color: #2caeba;
+}
+
+.line {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+.line img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+}
+.line a {
+  text-decoration: none;
+  color: #617d98;
+}
+.ml-2 {
+  margin-left: 2rem;
+}
+
+.search-icon {
+  height: 100%;
+  background-color: white;
+  border: none;
+}
+.btn-search {
+  height: 100%;
+  width: 6rem;
+  font-size: 1.3rem;
+  color: white;
+  letter-spacing: 2px;
+  transition: all 0.4s ease-in-out;
+}
+
+.input-group input {
+  border: none;
+}
+.input-group input:focus {
+  box-shadow: none;
+  outline: none;
+}
+.text-gray {
+  color: #617d98;
+}
+
+.navbar {
+  height: 5rem;
+  background-color: white;
+  margin-bottom: 5rem;
+}
+.navbar h4 {
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  font-size: 1.2rem;
+}
+.navbar strong {
+  text-transform: uppercase;
+}
+.navbar button {
+  font-size: 1.4rem;
+}
+.navbar img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+}
+
+
+/* register */
+
+.register {
+  height: 100vh;
+  color: white;
+  background: url(./landing.jpg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rcard {
+  border-top: 3px solid rgb(76, 240, 174);
+  background-color: rgba(0, 0, 0, 0.7);
+  /* height: 87vh; */
+  width: 25rem;
+  border-radius: 10px;
+  display: flex;
+}
+.rcard img {
+  width: 10rem;
+  margin: 0 auto;
+  display: flex;
+}
+.form {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form input {
+  outline: none;
+  margin: 1.4rem 0;
+  box-shadow: none;
+  border: none;
+  background-color: whitesmoke;
+  transition: all 0.3s ease-in-out;
+}
+.form input:focus {
+  box-shadow: none;
+  border-bottom: 2px solid rgb(6, 170, 151);
+}
+
+.sbtn {
+  background-color: rgb(6, 170, 151);
+  color: white;
+  font-size: 1.2rem;
+  font-family: monospace;
+}
+.sbtn:hover {
+  /* color: white; */
+  background-color: rgb(76, 240, 174);
+}
+.link {
+  text-decoration: none;
+  color: rgb(8, 193, 171);
+  cursor: pointer;
+}
+.link:hover {
+  color: rgba(7, 247, 150, 255);
+}
+
+.card-body{
+   width: 90%;
+}
