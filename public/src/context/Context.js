@@ -63,6 +63,7 @@ const AppProvider = ({ children }) => {
 
   const loginUser = async (currentUser) => {
     const { email, password, source } = currentUser
+ 
     try {
       const res = await axios.post(
         '/v1/login',
@@ -86,14 +87,14 @@ const AppProvider = ({ children }) => {
     const { name, email, password, source } = currentUser
     try {
       const res = await axios.post(
-        '/v1/login',
+        '/v1/signup',
         {
           name,
           email,
           password,
         }
       )
-
+      
       const jwt = res.data.token
        setToken(jwt)
       window.open('/dashboard', '_self')

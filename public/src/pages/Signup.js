@@ -50,6 +50,7 @@ export const Signup = () => {
       loginUser(currentUser)
     } else {
       registerUser(currentUser)
+    
     }
   }
 

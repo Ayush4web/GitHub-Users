@@ -16,7 +16,6 @@ export const Dashboard = () => {
    const [cookies, setCookie] = useCookies()
   
   const token = cookies.token
-  console.log(cookies)
      
   useEffect(() => {
     if (!token) {
