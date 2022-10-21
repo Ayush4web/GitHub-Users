@@ -29,7 +29,7 @@ export const Signup = () => {
   const socialLogin = async(e) => {
     e.preventDefault()
   
-    window.open(`${process.env.REACT_APP_BACK_URL}/auth/google`, '_self')
+    window.open('/auth/google', '_self')
    
      
   }
