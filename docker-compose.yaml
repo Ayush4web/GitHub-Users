@@ -1,0 +1,25 @@
+version: '3'
+services:
+  api-server:
+      image: node-image
+      restart: unless-stopped
+      build: ./
+      ports:
+        - "5000:5000"
+      volumes:
+        - . :/app
+      env_file:
+          - .env    
+
+  react-app:
+    image: react-image
+    restart: unless-stopped
+    build: ./public
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./public :/app/public
+    env_file:
+      - ./public/.env  
+       
+        

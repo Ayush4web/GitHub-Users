@@ -59,7 +59,7 @@ const login = async (req, res) => {
       profileImg: currentUser.profileImg,
     },
     process.env.JWT_SECRET,
-    { expiresIn: '1d' }
+    { expiresIn: '1h' }
   )
 
   res.cookie('token', token)

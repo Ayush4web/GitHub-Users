@@ -33,18 +33,12 @@ app.use(
       'img-src': [expressCspHeader.SELF],
     },
   })
-) 
+)
 
 const port = process.env.PORT || 5000
 
-// app.get('/', (req, res) => {
-//   res.json({ msg: 'welcome to the auth api' })
-// })
-
 app.use('/v1', authRouter)
 app.use('/v1', auth, dashboardRouter)
-
-
 
 // social login
 const passport = require('passport')
@@ -78,29 +72,31 @@ app.get(
   '/auth/google/callback',
   passport.authenticate('google'),
   (req, res) => {
-   
     if (!req.user) {
-        res
-          .status(401)
-          .json({ success: 'false', msg:"Authentication Failed" })
+      res.status(401).json({ success: 'false', msg: 'Authentication Failed' })
     }
     const { name, email, profileImg } = req.user
-     const token = jwt.sign({ name, email, profileImg }, process.env.JWT_SECRET)
-     
-    
+    const token = jwt.sign({ name, email, profileImg }, process.env.JWT_SECRET)
+
     res.cookie('token', token)
     res.redirect('/dashboard')
-    
   }
-
 )
- 
 
-app.use(express.static(path.join(__dirname, './public/build')))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, './public/build')))
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/build/index.html'))
-})
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/build/index.html'))
+  })
+  console.log("Running Production")
+} else {
+  app.get('/', (req, res) => {
+    res.json({ msg: 'welcome to the Github Users api' })
+  })
+
+  console.log('Running Development')
+}
 
 app.use(customErrorHandler)
 app.use(notfound)

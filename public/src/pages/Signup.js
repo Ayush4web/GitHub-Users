@@ -15,7 +15,7 @@ const initialState = {
 
 export const Signup = () => {
   const [value, setValue] = useState(initialState)
-  const [cookies,setCookie] = useCookies()
+  const [cookies, setCookie] = useCookies()
   const {
     loading,
     alert,
@@ -26,12 +26,10 @@ export const Signup = () => {
     removeAlert,
   } = useGlobalContext()
 
-  const socialLogin = async(e) => {
+  const socialLogin = async (e) => {
     e.preventDefault()
-  
+
     window.open('/auth/google', '_self')
-   
-     
   }
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -50,7 +48,6 @@ export const Signup = () => {
       loginUser(currentUser)
     } else {
       registerUser(currentUser)
-    
     }
   }
 
@@ -122,11 +119,11 @@ export const Signup = () => {
                 </a>
               </p>
               <p>OR</p>
-                <p>
-              <button onClick={socialLogin}>
+              <p>
+                <button onClick={socialLogin}>
                   <img src={google} alt='' />
-              </button>
-                </p>
+                </button>
+              </p>
             </div>
           </form>
         </div>

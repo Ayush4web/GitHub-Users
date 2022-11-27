@@ -6,57 +6,38 @@ import { useGlobalContext } from '../context/Context'
 import noImg from '../noImg.png'
 
 export const Navbar = () => {
-  const { loading, setLoading,setToken } = useGlobalContext()
+  const { loading, setLoading, setToken } = useGlobalContext()
   const navigate = useNavigate()
   const [cookies, setCookie, removeCookie] = useCookies()
-  
+
   const [user, setUser] = useState({ name: '', email: '', profileImg: '' })
   const fetch = async () => {
     setLoading(true)
-   
-    const token = cookies.token
-    const config = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }
 
-    const { data: res } = await axios.get(
-      '/v1/dashboard',
-      config
-    )
+    const { data: res } = await axios.get('/v1/dashboard')
 
     const { name, email, profileImg } = res.user
     setUser({ name, email, profileImg })
     setLoading(false)
-
   }
 
-  
   const handleLogout = async () => {
-    
     try {
-      const { data: res } = await axios.get(
-        '/v1/logout'
-      )
+      const { data: res } = await axios.get('/v1/logout')
 
       navigate('/signup')
-      removeCookie('token',{path:'/'})
-       
-    } catch (error) {
-      
-    }
-      
+      removeCookie('token', { path: '/' })
+    } catch (error) {}
   }
   useEffect(() => {
     fetch()
-  }, [cookies])
+  }, [])
   return (
     <section className='navbar d-flex align-item-center justify-content-center'>
       {user && (
         <div className='img'>
           <img
-            src={user.profileImg ? user.profileImg:noImg}
+            src={user.profileImg ? user.profileImg : noImg}
             alt={user.name}
           />
         </div>

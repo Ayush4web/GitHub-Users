@@ -4,11 +4,11 @@ const UnAutharise = require('../errors/UnAutharise')
 
 const auth = async (req, res, next) => {
   
-  if (!req.headers.authorization) {
+  if (!req.cookies.token) {
     throw new UnAutharise('You are not Autharised')
   }
   
-  const token = req.headers.authorization.split(' ')[1]
+  const token = req.cookies.token
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)

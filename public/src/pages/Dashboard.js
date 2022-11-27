@@ -16,7 +16,7 @@ export const Dashboard = () => {
    const [cookies, setCookie] = useCookies()
   
   const token = cookies.token
-     
+  
   useEffect(() => {
     if (!token) {
       navigate('/signup')
